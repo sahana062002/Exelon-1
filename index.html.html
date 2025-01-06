@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* Set page background to white */
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 20px;
+            width: 20px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .nav-middle {
+            list-style: none;
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .nav-middle li {
+            font-size: 16px;
+            position: relative;
+        }
+
+        .nav-middle li:not(:last-child)::after {
+            content: '•';
+            font-size: 12px;
+            color: #000;
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .faq {
+            font-size: 16px;
+            color: #000;
+        }
+
+        .get-quote {
+            background-color: #D6A4FF;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .nav-middle, .nav-right {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-items.active {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #fff;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+            }
+
+            .nav-items.active .nav-middle,
+            .nav-items.active .nav-right {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .footer {
+                display: block;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .footer-images {
+                display: block;
+                margin-top: 20px;
+            }
+
+            .footer-images img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin: 10px auto;
+                object-fit: cover;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .footer-separator {
+                display: none;
+                color: black;
+            }
+
+            .footer-content {
+                margin-top: 20px;
+                font-size: 16px;
+                color: #333;
+            }
+        }
+
+        .hero {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .hero-left h1 {
+            font-size: 48px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .footer-separator {
+            font-size: 24px;
+            color: #999;
+            margin: 0 10px;
+        }
+
+        .hero-right-text {
+            margin-right: 10px;
+            font-size: 20px;
+            color: black;
+        }
+
+        .work-button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .work-button:hover {
+            background-color: #444;
+        }
+
+        .rounded-image-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px auto;
+            padding: 0 15px;
+        }
+
+        .rounded-image {
+            width: 80%;
+            max-width: 95%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            max-width: 95%;
+            margin: 20px auto;
+        }
+
+        .logo-section img {
+            width: calc(100% / 5 - 10px);
+            max-width: 100px;
+            height: auto;
+        }
+
+        .growth-section {
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff; /* Set background to white */
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .growth-section h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px 10px 0 0;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .footer-images {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .footer-images img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            margin-left: 20px;
+            font-size: 18px;
+            color: #333;
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 20px;
+                flex-direction: column-reverse;
+            }
+
+            .footer-images {
+                margin-bottom: 0px;
+            }
+
+            .footer-content {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <div class="nav-items">
+                <ul class="nav-middle">
+                    <li>Product</li>
+                    <li>Solutions</li>
+                    <li>Pricing</li>
+                    <li>Developers</li>
+                </ul>
+                <div class="nav-right">
+                    <span class="faq">FAQ</span>
+                    <a href="#" class="get-quote">Get Quote</a>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <h1>
+                <span>Plan.</span><br>
+                <span>Manage.</span><br>
+                <span>Build.</span>
+            </h1>
+        </div>
+        <div class="hero-right">
+            <div class="footer-separator" >/</div>
+            <div class="hero-right-text">
+                Our Difference Is In<br>The Finishing
+            </div>
+            <a href="#" class="work-button">Work &rarr;</a>
+        </div>
+    </section>
+
+    <!-- Section with rounded image -->
+    <section class="rounded-image-section">
+        <img src="wallpaper.jpg" alt="Rounded Image" class="rounded-image">
+    </section>
+
+    <!-- Section for logos -->
+    <section class="logo-section">
+        <img src="rukuten.jpg" alt="Logo 1">
+        <img src="NCR.png" alt="Logo 2">
+        <img src="monday.jpg" alt="Logo 3">
+        <img src="disney.jpg" alt="Logo 4">
+        <img src="dropbox.png" alt="Logo 5">
+    </section>
+
+    <!-- Section for growth text -->
+    <section class="growth-section">
+        <h2>To enhance the growth of your website, it's essential to expedite the release of new pages.</h2>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-images">
+            <img src="logo1.jpg" alt="Person 1">
+            <img src="logo2.jpg" alt="Person 2">
+            <img src="logo3.jpg" alt="Person 3">
+            <img src="logo4.jpg" alt="Person 4">
+        </div>
+        <div class="footer-separator">/</div>
+        <div class="footer-content">
+            We received a great amount of work in just 2 weeks timeline!<br><br>
+            <strong>Deniel, Design Lead @ Google</strong>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navItems = document.querySelector('.nav-items');
+            navItems.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
